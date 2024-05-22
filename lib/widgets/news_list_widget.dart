@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:newsus/constants/asset_constant.dart';
 import 'package:newsus/constants/text_style_constant.dart';
 import 'package:newsus/models/get_news_us_response_model.dart';
+import 'package:newsus/screens/detail/detail_screen.dart';
 
 part 'news_image_widget.dart';
 part 'news_title_widget.dart';
@@ -11,6 +12,8 @@ part 'news_published_date_widget.dart';
 part 'news_item_list_widget.dart';
 part 'news_item_grid_widget.dart';
 part 'news_grid_widget.dart';
+part 'news_content_widget.dart';
+part 'news_description_widget.dart';
 
 class NewsListWidget extends StatelessWidget {
   final List<Article>? articles;
@@ -24,7 +27,14 @@ class NewsListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final article = articles![index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailScreen(article: article),
+              ),
+            );
+          },
           child: NewsItemListWidget(
             urlToImage: article.urlToImage,
             title: article.title,

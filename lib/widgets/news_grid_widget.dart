@@ -22,7 +22,14 @@ class NewsGridWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final article = articles![index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailScreen(article: article),
+              ),
+            );
+          },
           child: NewsItemGridWidget(
             urlToImage: article.urlToImage,
             title: article.title,
