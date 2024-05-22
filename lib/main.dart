@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newsus/constants/name_routes_constant.dart';
 import 'package:newsus/screens/home/home_screen.dart';
+import 'package:newsus/screens/splash/splash_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -53,7 +54,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: NameRoutes.initRoute,
         routes: {
-          NameRoutes.initRoute: (context) => const HomeScreen(),
+          NameRoutes.initRoute: (context) => const SplashScreen(),
           NameRoutes.homeScreen: (context) => const HomeScreen(),
         },
       );
