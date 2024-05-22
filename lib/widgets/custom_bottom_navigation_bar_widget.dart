@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsus/screens/bookmark/bookmark_screen.dart';
 import 'package:newsus/screens/home/home_screen.dart';
 
 class CustomBottomNavigationBarWidget extends StatefulWidget {
@@ -26,7 +27,7 @@ class CustomBottomNavigationBarWidgetState
         index: _currentIndex,
         children: const [
           HomeScreen(),
-          SizedBox(),
+          BookmarkScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

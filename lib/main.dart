@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newsus/constants/name_routes_constant.dart';
-import 'package:newsus/screens/home/home_screen.dart';
 import 'package:newsus/screens/splash/splash_screen.dart';
 import 'package:newsus/widgets/custom_bottom_navigation_bar_widget.dart';
 

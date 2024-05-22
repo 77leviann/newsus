@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsus/constants/text_style_constant.dart';
 import 'package:newsus/models/get_news_us_response_model.dart';
+import 'package:newsus/widgets/custom_bookmark_widget.dart';
 import 'package:newsus/widgets/news_list_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,9 +28,11 @@ class DetailScreenState extends State<DetailScreen> {
           throw 'Could not launch $uri';
         }
       } catch (e) {
-        SnackBar(
-          content: Text('Error launching URL: $e'),
-        );
+        if (mounted) {
+          SnackBar(
+            content: Text('Error launching URL: $e'),
+          );
+        }
       }
     }
   }
@@ -95,13 +98,26 @@ class DetailScreenState extends State<DetailScreen> {
                   const SizedBox(
                     height: 4,
                   ),
-                  NewsPublishedDateWidget(
-                    publishedAt: article.publishedAt,
+                  Row(
+                    children: [
+                      NewsPublishedDateWidget(
+                        publishedAt: article.publishedAt,
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      CustomBookmarkWidget(
+                        article: article,
+                      )
+                    ],
                   ),
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        _launchURL(context, article.url);
+                        _launchURL(
+                          context,
+                          article.url,
+                        );
                       },
                       child: const Text('Read More'),
                     ),
