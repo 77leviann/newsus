@@ -5,7 +5,9 @@ import 'package:newsus/widgets/custom_bookmark_widget.dart';
 import 'package:newsus/widgets/news_list_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailScreen extends StatefulWidget {
+part '../../providers/detail_provider.dart';
+
+class DetailScreen extends StatelessWidget {
   final Article article;
 
   const DetailScreen({
@@ -14,33 +16,7 @@ class DetailScreen extends StatefulWidget {
   });
 
   @override
-  DetailScreenState createState() => DetailScreenState();
-}
-
-class DetailScreenState extends State<DetailScreen> {
-  Future<void> _launchURL(BuildContext context, String? url) async {
-    if (url != null && url.isNotEmpty) {
-      var uri = Uri.parse(url.toLowerCase());
-      try {
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.inAppWebView);
-        } else {
-          throw 'Could not launch $uri';
-        }
-      } catch (e) {
-        if (mounted) {
-          SnackBar(
-            content: Text('Error launching URL: $e'),
-          );
-        }
-      }
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final article = widget.article;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -48,16 +24,19 @@ class DetailScreenState extends State<DetailScreen> {
           style: TextStyleConstant.headlineMedium(context),
         ),
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(
+          context,
+        ).colorScheme.primary,
         leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
-        ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(
+                context,
+              ).colorScheme.onPrimary,
+            )),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -114,7 +93,7 @@ class DetailScreenState extends State<DetailScreen> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        _launchURL(
+                        DetailProvider.launchURL(
                           context,
                           article.url,
                         );
